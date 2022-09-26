@@ -7,8 +7,12 @@ with sync_playwright() as p:
     browser = p.chromium.connect_over_cdp('http://localhost:9220')
   except:
     os.system("xvfb-run -a chromium --remote-debugging-port=9220 --no-sandbox --disable-gpu &")
-    sleep(10)
-    browser = p.chromium.connect_over_cdp('http://localhost:9220')
+    while True:
+      try:
+        browser = p.chromium.connect_over_cdp('http://localhost:9220')
+        break
+      except:
+        sleep(1)
   print("starting")
   page = browser.new_page()
   page.goto("https://wizzair.com/en-gb#/booking/select-flight/WAW/MAD/2022-10-17/null/1/0/0/null")
