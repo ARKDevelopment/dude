@@ -6,7 +6,7 @@ with sync_playwright() as p:
   try:
     browser = p.chromium.connect_over_cdp('http://localhost:9222')
   except:
-    os.system("xvfb-run -a chromium --remote-debugging-port=9222 --no-sandbox")
+    os.system("xvfb-run -a chromium --remote-debugging-port=9222 --no-sandbox &")
     sleep(5)
     browser = p.chromium.connect_over_cdp('http://localhost:9222')
   page = browser.new_page()
