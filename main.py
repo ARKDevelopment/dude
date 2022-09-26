@@ -4,12 +4,12 @@ from playwright.sync_api import sync_playwright
 
 with sync_playwright() as p:
   try:
-    browser = p.chromium.connect_over_cdp('http://localhost:9220')
+    browser = p.chromium.connect_over_cdp('http://127.0.0.1:9220')
   except:
     os.system("xvfb-run -a firefox --remote-debugging-port=9220 --no-sandbox --disable-gpu &")
     while True:
       try:
-        browser = p.chromium.connect_over_cdp('http://localhost:9220')
+        browser = p.chromium.connect_over_cdp('http://127.0.0.1:9220')
         break
       except:
         sleep(1)
